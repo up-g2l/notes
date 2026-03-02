@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gamma Distribution</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:wght@300;400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    background: #faf8f4;
+    color: #1a1612;
+    line-height: 1.75;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    border-top: 3px solid #1a1612;
+    border-bottom: 1px solid #ccc;
+    padding: 2rem 0 1.5rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .header .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #b05b2c;
+    font-weight: 600;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .header .subtitle {
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #555;
+    margin-top: 0.3rem;
+  }
+
+  /* Section titles */
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 2.2rem 0 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid #ddd;
+    color: #1a1612;
+  }
+
+  p { margin-bottom: 0.9rem; font-size: 1rem; }
+
+  /* Formula block */
+  .formula-box {
+    background: #1a1612;
+    color: #f5f0e8;
+    border-radius: 4px;
+    padding: 1.4rem 1.8rem;
+    margin: 1.5rem 0;
+    font-size: 1.05rem;
+    line-height: 2;
+  }
+
+  .formula-box .formula {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #f0c87a;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .formula-box .params {
+    font-size: 0.88rem;
+    color: #ccc;
+    line-height: 1.9;
+  }
+
+  /* Key facts row */
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .fact-card {
+    background: #fff;
+    border: 1px solid #e0dbd4;
+    border-top: 3px solid #b05b2c;
+    padding: 1rem 1.2rem;
+    border-radius: 2px;
+  }
+
+  .fact-card .fact-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #888;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .fact-card .fact-value {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #1a1612;
+  }
+
+  /* Examples */
+  .example {
+    background: #fff;
+    border-left: 4px solid #b05b2c;
+    padding: 1.1rem 1.4rem;
+    margin: 1rem 0;
+    border-radius: 0 3px 3px 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+
+  .example-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .example-num {
+    background: #b05b2c;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .example-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  .example p { margin-bottom: 0.4rem; font-size: 0.95rem; }
+  .example .note {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #777;
+    font-style: italic;
+  }
+
+  /* Special cases */
+  .special-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  @media (max-width: 500px) {
+    .special-grid { grid-template-columns: 1fr; }
+  }
+
+  .special-card {
+    border: 1px solid #ddd;
+    padding: 0.9rem 1.1rem;
+    border-radius: 3px;
+    background: #f5f2ed;
+  }
+
+  .special-card strong {
+    display: block;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .special-card span { font-size: 0.9rem; color: #555; }
+
+  /* Curve sketch using SVG */
+  .curve-container {
+    margin: 1.5rem 0;
+    background: #fff;
+    border: 1px solid #e0dbd4;
+    border-radius: 4px;
+    padding: 1rem;
+  }
+
+  .curve-container .caption {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+
+  /* Footer rule */
+  .footer {
+    margin-top: 3rem;
+    border-top: 1px solid #ccc;
+    padding-top: 0.8rem;
+    font-size: 0.78rem;
+    color: #999;
+    text-align: right;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <span class="label">Probability &amp; Statistics</span>
+    <h1>Gamma Distribution</h1>
+    <p class="subtitle">A continuous distribution for waiting times and positive, skewed data</p>
+  </header>
+
+  <!-- Overview -->
+  <h2>Overview</h2>
+  <p>The <strong>Gamma distribution</strong> is a two-parameter family of continuous probability distributions defined on the positive real line (x > 0). It generalizes the Exponential distribution and is closely related to the Chi-squared distribution.</p>
+  <p>It models the total waiting time until a fixed number of independent events occur, making it fundamental in reliability engineering, queueing theory, hydrology, and Bayesian statistics.</p>
+
+  <!-- PDF -->
+  <h2>Probability Density Function</h2>
+  <div class="formula-box">
+    <span class="formula">f(x; α, β) = x<sup>α−1</sup> e<sup>−x/β</sup> / (β<sup>α</sup> Γ(α)),&nbsp;&nbsp; x &gt; 0</span>
+    <div class="params">
+      <strong>α (shape)</strong> — number of events; α &gt; 0<br>
+      <strong>β (scale)</strong> — average time between events; β &gt; 0<br>
+      <strong>Γ(α)</strong> — the Gamma function; Γ(n) = (n−1)! for positive integers
+    </div>
+  </div>
+
+  <!-- Key facts -->
+  <h2>Key Properties</h2>
+  <div class="facts">
+    <div class="fact-card">
+      <div class="fact-label">Mean</div>
+      <div class="fact-value">αβ</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label">Variance</div>
+      <div class="fact-value">αβ²</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label">Mode</div>
+      <div class="fact-value">(α−1)β, α ≥ 1</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label">Skewness</div>
+      <div class="fact-value">2 / √α</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label">Support</div>
+      <div class="fact-value">x ∈ (0, ∞)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label">MGF</div>
+      <div class="fact-value">(1−βt)<sup>−α</sup></div>
+    </div>
+  </div>
+
+  <!-- Shape curves -->
+  <div class="curve-container">
+    <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+      <!-- Axes -->
+      <line x1="40" y1="170" x2="540" y2="170" stroke="#999" stroke-width="1.2"/>
+      <line x1="40" y1="10" x2="40" y2="170" stroke="#999" stroke-width="1.2"/>
+      <!-- x-axis ticks -->
+      <text x="540" y="185" font-size="10" fill="#999" text-anchor="middle">x</text>
+      <text x="30" y="15" font-size="10" fill="#999" text-anchor="middle">f(x)</text>
+
+      <!-- Curve α=1, β=1 (Exponential) -->
+      <polyline fill="none" stroke="#b05b2c" stroke-width="2"
+        points="40,40 60,61 80,79 100,94 120,106 140,116 160,124 180,131 200,137 230,144 260,150 300,156 350,162 400,166 450,168 500,170"/>
+      <text x="55" y="35" font-size="10" fill="#b05b2c">α=1 (Exponential)</text>
+
+      <!-- Curve α=2, β=1 -->
+      <polyline fill="none" stroke="#2c7bb0" stroke-width="2"
+        points="40,170 55,158 70,142 90,122 110,107 130,97 150,91 170,89 190,89 220,93 260,102 300,113 350,127 400,141 450,154 500,163"/>
+      <text x="155" y="83" font-size="10" fill="#2c7bb0">α=2</text>
+
+      <!-- Curve α=5, β=1 -->
+      <polyline fill="none" stroke="#2ca05e" stroke-width="2"
+        points="40,170 70,170 100,168 130,158 160,138 190,112 220,89 250,76 280,72 310,75 340,83 380,99 420,116 460,133 500,148"/>
+      <text x="270" y="68" font-size="10" fill="#2ca05e">α=5</text>
+
+      <!-- Curve α=9, β=1 -->
+      <polyline fill="none" stroke="#7b2cb0" stroke-width="2"
+        points="40,170 100,170 150,170 200,164 240,148 280,122 320,97 360,82 400,80 430,83 460,91 490,102 520,116"/>
+      <text x="400" y="76" font-size="10" fill="#7b2cb0">α=9</text>
+    </svg>
+    <p class="caption">Gamma PDF shapes for β = 1 and varying α. As α increases, the distribution becomes more symmetric and bell-shaped.</p>
+  </div>
+
+  <!-- Examples -->
+  <h2>Examples</h2>
+
+  <div class="example">
+    <div class="example-header">
+      <span class="example-num">Ex 1</span>
+      <span class="example-title">Customer Service Call Times</span>
+    </div>
+    <p>Calls arrive at a call center and each agent handles one call at a time. The time to resolve a single call follows an Exponential(β = 5 min). The total time to handle <strong>α = 3</strong> consecutive calls follows a <strong>Gamma(α=3, β=5)</strong> distribution.</p>
+    <p><strong>Mean total time</strong> = αβ = 3 × 5 = <strong>15 minutes</strong></p>
+    <p><strong>Variance</strong> = αβ² = 3 × 25 = 75 &nbsp;⟹&nbsp; SD ≈ 8.66 min</p>
+    <p class="note">Insight: The Gamma distribution is the sum of α independent Exponential(β) random variables.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-header">
+      <span class="example-num">Ex 2</span>
+      <span class="example-title">Rainfall Modeling</span>
+    </div>
+    <p>Monthly rainfall totals in a semi-arid region are modeled as <strong>Gamma(α=2, β=15 mm)</strong>.</p>
+    <p><strong>Expected rainfall</strong> = 2 × 15 = <strong>30 mm/month</strong></p>
+    <p><strong>Standard deviation</strong> = √(2 × 225) ≈ <strong>21.2 mm</strong></p>
+    <p class="note">The positive skew of the Gamma is ideal here: rainfall can't be negative, occasional months can have very high totals.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-header">
+      <span class="example-num">Ex 3</span>
+      <span class="example-title">Bayesian Inference (Conjugate Prior)</span>
+    </div>
+    <p>In Bayesian statistics, if the likelihood is Poisson(λ), then the <strong>conjugate prior</strong> for λ is a Gamma distribution. Suppose we observe 12 events over 3 time units. With a Gamma(1, 1) prior, the posterior is <strong>Gamma(α = 1+12 = 13, β updated)</strong>.</p>
+    <p class="note">The Gamma is the natural prior for rate parameters — it is closed under Poisson updating, making inference analytically tractable.</p>
+  </div>
+
+  <!-- Special cases -->
+  <h2>Special Cases</h2>
+  <div class="special-grid">
+    <div class="special-card">
+      <strong>Exponential Distribution</strong>
+      <span>Gamma(α = 1, β) — time until the first event</span>
+    </div>
+    <div class="special-card">
+      <strong>Chi-Squared Distribution</strong>
+      <span>Gamma(α = k/2, β = 2) — used in hypothesis testing</span>
+    </div>
+    <div class="special-card">
+      <strong>Erlang Distribution</strong>
+      <span>Gamma with integer α — used in telecom/queueing</span>
+    </div>
+    <div class="special-card">
+      <strong>Normal (approx.)</strong>
+      <span>As α → ∞, Gamma → Normal by CLT</span>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <h2>When to Use the Gamma Distribution</h2>
+  <p>Use the Gamma distribution when you have <strong>continuous, positive data</strong> that is <strong>right-skewed</strong>, particularly when modeling:</p>
+  <p>waiting times for multiple events · failure/survival times in reliability · precipitation and environmental data · income and insurance claim sizes · posterior distributions of rate parameters in Bayesian analysis</p>
+
+  <div class="footer">Gamma Distribution &nbsp;|&nbsp; Probability &amp; Statistics Reference</div>
+
+</div>
+</body>
+</html>
