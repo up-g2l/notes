@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>MA 574 (F25) – Quiz 2 Solutions</title>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { font-family: Georgia, serif; max-width: 820px; margin: 0 auto; padding: 16px; font-size: 15px; line-height: 1.7; color: #111; }
+    h2 { text-align: center; font-size: 1.15rem; margin-bottom: 4px; }
+    hr { margin: 8px 0 20px; }
+    .problem { margin-bottom: 36px; }
+    .problem-title { font-weight: bold; font-size: 1rem; margin-bottom: 6px; }
+    .solution-label { font-weight: bold; color: #1a1a8c; margin-top: 10px; }
+    .step { margin: 6px 0 6px 18px; }
+    .answer { background: #f0f4ff; border-left: 4px solid #1a1a8c; padding: 6px 12px; margin-top: 10px; display: inline-block; }
+    table { border-collapse: collapse; margin: 10px 0; font-size: 0.93rem; }
+    td, th { border: 1px solid #aaa; padding: 4px 10px; text-align: center; }
+    th { background: #e8e8e8; }
+  </style>
+</head>
+<body>
+
+<h2>MA 574 (F25) &mdash; Quiz 2 &mdash; Solutions</h2>
+<hr/>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="problem">
+  <div class="problem-title">Problem 1.</div>
+  <p>
+    What is the probability that a driver will pass through point <strong>C</strong>
+    while driving from place <strong>A</strong> to place <strong>B</strong> by using
+    shortest routes on the given street layout?
+    <br/>
+    <em>Grid: A = (0,0), B = (6,5), C = (2,3).</em>
+  </p>
+
+  <div class="solution-label">Solution</div>
+
+  <p class="step">
+    On a rectangular grid, a shortest path from \((0,0)\) to \((6,5)\) consists of
+    exactly \(6\) steps East (R) and \(5\) steps North (U), in any order.
+    The total number of such shortest paths is
+    \[
+      \binom{6+5}{6} = \binom{11}{6} = 462.
+    \]
+  </p>
+
+  <p class="step">
+    To pass through \(C=(2,3)\) a driver must first travel a shortest path from
+    \(A=(0,0)\) to \(C=(2,3)\), then a shortest path from \(C=(2,3)\) to \(B=(6,5)\).
+  </p>
+
+  <p class="step">
+    <strong>Paths A → C:</strong> 2 steps East, 3 steps North.
+    \[
+      \binom{2+3}{2} = \binom{5}{2} = 10.
+    \]
+  </p>
+
+  <p class="step">
+    <strong>Paths C → B:</strong> \((6-2)=4\) steps East, \((5-3)=2\) steps North.
+    \[
+      \binom{4+2}{4} = \binom{6}{4} = 15.
+    \]
+  </p>
+
+  <p class="step">
+    <strong>Paths through C:</strong>
+    \[
+      10 \times 15 = 150.
+    \]
+  </p>
+
+  <p class="step">
+    <strong>Probability:</strong>
+    \[
+      P(C) = \frac{150}{462} = \frac{25}{77} \approx 0.3247.
+    \]
+  </p>
+
+  <div class="answer">
+    \(\displaystyle P(\text{pass through }C) = \frac{25}{77} \approx 32.47\%\)
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="problem">
+  <div class="problem-title">Problem 2.</div>
+  <p>
+    Six Stevens faculty members are randomly surveyed from 11 equally likely departments.
+    What is the probability that <strong>at least two</strong> are from the same department?
+  </p>
+
+  <div class="solution-label">Solution</div>
+
+  <p class="step">
+    It is easier to use the complement: \(P(\text{at least two same}) = 1 - P(\text{all different})\).
+  </p>
+
+  <p class="step">
+    Each of the 6 faculty members is independently assigned to one of 11 departments.
+    Total equally likely outcomes:
+    \[
+      11^6 = 1{,}771{,}561.
+    \]
+  </p>
+
+  <p class="step">
+    Outcomes where <em>all 6 are from different departments</em>
+    (choosing 6 distinct departments out of 11, ordered):
+    \[
+      11 \times 10 \times 9 \times 8 \times 7 \times 6 = \frac{11!}{5!} = 332{,}640.
+    \]
+  </p>
+
+  <p class="step">
+    \[
+      P(\text{all different}) = \frac{332{,}640}{1{,}771{,}561} \approx 0.1879.
+    \]
+  </p>
+
+  <p class="step">
+    \[
+      P(\text{at least two same}) = 1 - 0.1879 \approx 0.8121.
+    \]
+  </p>
+
+  <div class="answer">
+    \(\displaystyle P(\text{at least two from same dept}) = 1 - \frac{11\cdot10\cdot9\cdot8\cdot7\cdot6}{11^6}
+    = \frac{1{,}438{,}921}{1{,}771{,}561} \approx 81.2\%\)
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="problem">
+  <div class="problem-title">Problem 3.</div>
+  <p>
+    A die is rolled five times. What is the probability of obtaining
+    <strong>all different numbers</strong> on the five rolls,
+    <strong>given that</strong> the first and last rolls add to 5?
+  </p>
+
+  <div class="solution-label">Solution</div>
+
+  <p class="step">
+    Let \(E\) = "all five rolls are different" and \(F\) = "first roll + last roll = 5".
+    We want \(P(E \mid F)\).
+  </p>
+
+  <p class="step">
+    <strong>Find \(P(F)\):</strong><br/>
+    Pairs \((d_1, d_5)\) with \(d_1+d_5=5\): \((1,4),(2,3),(3,2),(4,1)\). That is 4 pairs.
+    \[
+      P(F) = \frac{4 \times 6^3}{6^5} = \frac{4}{36} = \frac{1}{9}.
+    \]
+    (The middle three rolls are free; each pair has probability \(1/36\).)
+  </p>
+
+  <p class="step">
+    <strong>Find \(P(E \cap F)\):</strong><br/>
+    We need all 5 rolls distinct AND \(d_1+d_5=5\).
+    The valid pairs \((d_1,d_5)\) are the same 4 pairs above (note all pairs have distinct values).
+    For each such pair, the 3 middle rolls must be distinct and different from both \(d_1\) and \(d_5\).
+    There are \(6-2=4\) remaining values, so the middle 3 rolls must be 3 distinct values chosen
+    from those 4:
+    \[
+      4 \times 3 \times 2 = 24 \text{ ordered choices}.
+    \]
+    Number of favorable outcomes: \(4 \times 24 = 96\).
+    \[
+      P(E \cap F) = \frac{96}{6^5} = \frac{96}{7776} = \frac{2}{162} = \frac{1}{81}.
+    \]
+  </p>
+
+  <p class="step">
+    <strong>Conditional probability:</strong>
+    \[
+      P(E \mid F) = \frac{P(E \cap F)}{P(F)} = \frac{96/7776}{4 \cdot 216/7776} = \frac{96}{864} = \frac{2}{18} = \frac{1}{9}.
+    \]
+  </p>
+
+  <div class="answer">
+    \(\displaystyle P(\text{all different} \mid d_1+d_5=5) = \frac{96}{864} = \frac{1}{9} \approx 11.1\%\)
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="problem">
+  <div class="problem-title">Problem 4.</div>
+  <p>
+    A bag contains 6 red and 5 blue balls (11 total). Three balls are drawn at random.
+    What is the probability of drawing <strong>at least one red ball</strong>?
+  </p>
+
+  <div class="solution-label">Solution</div>
+
+  <p class="step">
+    Use the complement: \(P(\text{at least one red}) = 1 - P(\text{no red}) = 1 - P(\text{all blue})\).
+  </p>
+
+  <p class="step">
+    Total ways to choose 3 from 11:
+    \[
+      \binom{11}{3} = 165.
+    \]
+  </p>
+
+  <p class="step">
+    Ways to choose 3 blue balls from 5:
+    \[
+      \binom{5}{3} = 10.
+    \]
+  </p>
+
+  <p class="step">
+    \[
+      P(\text{all blue}) = \frac{10}{165} = \frac{2}{33}.
+    \]
+  </p>
+
+  <p class="step">
+    \[
+      P(\text{at least one red}) = 1 - \frac{2}{33} = \frac{31}{33}.
+    \]
+  </p>
+
+  <div class="answer">
+    \(\displaystyle P(\text{at least one red}) = \frac{31}{33} \approx 93.9\%\)
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="problem">
+  <div class="problem-title">Problem 5.</div>
+  <p>
+    Let \(E\) and \(F\) be events with \(Pr(E)=0.7\), \(Pr(F)=0.5\), and \(Pr(F\mid E)=0.6\).
+    Find \(Pr(E \cup F)\).
+  </p>
+
+  <div class="solution-label">Solution</div>
+
+  <p class="step">
+    <strong>Step 1 – Find \(Pr(E \cap F)\)</strong> using the definition of conditional probability:
+    \[
+      Pr(F \mid E) = \frac{Pr(E \cap F)}{Pr(E)}
+      \implies Pr(E \cap F) = 0.6 \times 0.7 = 0.42.
+    \]
+  </p>
+
+  <p class="step">
+    <strong>Step 2 – Apply the inclusion-exclusion formula:</strong>
+    \[
+      Pr(E \cup F) = Pr(E) + Pr(F) - Pr(E \cap F)
+      = 0.7 + 0.5 - 0.42 = 0.78.
+    \]
+  </p>
+
+  <div class="answer">
+    \(\displaystyle Pr(E \cup F) = 0.78\)
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="problem">
+  <div class="problem-title">Problem 6.</div>
+  <p>
+    Let \(A\) and \(B\) be <strong>independent</strong> events with
+    \(Pr(A)=0.5\) and \(Pr(B)=0.6\).
+    What is the probability that <strong>neither</strong> \(A\) nor \(B\) occurs?
+  </p>
+
+  <div class="solution-label">Solution</div>
+
+  <p class="step">
+    We want \(Pr(A^c \cap B^c) = Pr((A \cup B)^c) = 1 - Pr(A \cup B)\).
+  </p>
+
+  <p class="step">
+    Since \(A\) and \(B\) are independent:
+    \[
+      Pr(A \cap B) = Pr(A) \cdot Pr(B) = 0.5 \times 0.6 = 0.30.
+    \]
+  </p>
+
+  <p class="step">
+    \[
+      Pr(A \cup B) = 0.5 + 0.6 - 0.30 = 0.80.
+    \]
+  </p>
+
+  <p class="step">
+    Equivalently, since \(A^c\) and \(B^c\) are also independent:
+    \[
+      Pr(A^c \cap B^c) = Pr(A^c)\cdot Pr(B^c) = (1-0.5)(1-0.6) = 0.5 \times 0.4 = 0.20.
+    \]
+  </p>
+
+  <div class="answer">
+    \(\displaystyle Pr(\text{neither } A \text{ nor } B) = 0.20\)
+  </div>
+</div>
+
+</body>
+</html>

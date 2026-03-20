@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>MA 540 (S26) – Quiz 6 Solutions</title>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { font-family: Georgia, serif; max-width: 840px; margin: 0 auto; padding: 16px; font-size: 15px; line-height: 1.75; color: #111; }
+    h2 { text-align: center; font-size: 1.15rem; margin-bottom: 4px; }
+    hr { margin: 8px 0 20px; }
+    .problem { margin-bottom: 44px; }
+    .problem-title { font-weight: bold; font-size: 1.05rem; margin-bottom: 8px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+    .subpart { margin-top: 22px; }
+    .subpart-label { font-weight: bold; color: #333; }
+    .solution-label { font-weight: bold; color: #1a1a8c; margin-top: 10px; margin-bottom: 2px; }
+    .step { margin: 6px 0 6px 18px; }
+    .answer { background: #f0f4ff; border-left: 4px solid #1a1a8c; padding: 7px 14px; margin: 8px 0 8px 18px; display: block; }
+    .note  { font-size: 0.88rem; color: #444; font-style: italic; margin: 4px 0 4px 18px; }
+    table { border-collapse: collapse; margin: 10px 18px; font-size: 0.9rem; }
+    td, th { border: 1px solid #999; padding: 6px 14px; text-align: center; }
+    th { background: #e8e8e8; }
+    td.hi { background: #fff7e0; font-weight: bold; }
+    td.marg { background: #eaf4ea; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<h2>MA 540 (S26) &mdash; Quiz 6 Solutions</h2>
+<hr/>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="problem">
+  <div class="problem-title">Problem 1 &mdash; Joint PMF of Discrete Random Variables \(X\) and \(Y\)</div>
+
+  <p class="step">The joint PMF is given by the following table:</p>
+
+  <table>
+    <tr>
+      <th>\(P(X{=}x,Y{=}y)\)</th>
+      <th>\(Y=1\)</th><th>\(Y=2\)</th><th>\(Y=3\)</th>
+      <th class="marg">\(P(X=x)\)</th>
+    </tr>
+    <tr>
+      <th>\(X=1\)</th>
+      <td>0.1</td><td>0.1</td><td>0.2</td>
+      <td class="marg">0.4</td>
+    </tr>
+    <tr>
+      <th>\(X=2\)</th>
+      <td>0.2</td><td>0.1</td><td>0.1</td>
+      <td class="marg">0.4</td>
+    </tr>
+    <tr>
+      <th>\(X=3\)</th>
+      <td>0.1</td><td>0.1</td><td>0.0</td>
+      <td class="marg">0.2</td>
+    </tr>
+    <tr>
+      <th class="marg">\(P(Y=y)\)</th>
+      <td class="marg">0.4</td>
+      <td class="marg">0.3</td>
+      <td class="marg">0.3</td>
+      <td class="marg">1.0</td>
+    </tr>
+  </table>
+
+  <!-- (a) -->
+  <div class="subpart">
+    <span class="subpart-label">(a) Marginal distributions of \(X\) and \(Y\)</span>
+    <p class="step">
+      Row sums give the marginal PMF of \(X\); column sums give the marginal PMF of \(Y\).
+    </p>
+    <p class="step">
+      \[
+        P(X=1)=0.1+0.1+0.2=0.4,\quad P(X=2)=0.2+0.1+0.1=0.4,\quad P(X=3)=0.1+0.1+0.0=0.2.
+      \]
+      \[
+        P(Y=1)=0.1+0.2+0.1=0.4,\quad P(Y=2)=0.1+0.1+0.1=0.3,\quad P(Y=3)=0.2+0.1+0.0=0.3.
+      \]
+    </p>
+    <div class="answer">
+      Marginal of \(X\): \(\;P(X=1)=0.4,\quad P(X=2)=0.4,\quad P(X=3)=0.2.\)<br/>
+      Marginal of \(Y\): \(\;P(Y=1)=0.4,\quad P(Y=2)=0.3,\quad P(Y=3)=0.3.\)
+    </div>
+  </div>
+
+  <!-- (b) -->
+  <div class="subpart">
+    <span class="subpart-label">(b) Find \(P(X > Y)\)</span>
+    <p class="step">
+      List all pairs \((x,y)\) with \(x > y\) and sum their joint probabilities:
+      \[
+        (2,1),\quad (3,1),\quad (3,2).
+      \]
+      \[
+        P(X>Y) = P(2,1)+P(3,1)+P(3,2) = 0.2 + 0.1 + 0.1 = 0.4.
+      \]
+    </p>
+    <div class="answer">
+      \(\displaystyle P(X > Y) = 0.4\)
+    </div>
+  </div>
+
+  <!-- (c) -->
+  <div class="subpart">
+    <span class="subpart-label">(c) Find \(P(X=2 \mid Y=1)\)</span>
+    <p class="step">
+      Use the definition of conditional probability:
+      \[
+        P(X=2 \mid Y=1) = \frac{P(X=2,\,Y=1)}{P(Y=1)} = \frac{0.2}{0.4} = 0.5.
+      \]
+    </p>
+    <div class="answer">
+      \(\displaystyle P(X=2 \mid Y=1) = \frac{0.2}{0.4} = 0.5\)
+    </div>
+  </div>
+
+  <!-- (d) -->
+  <div class="subpart">
+    <span class="subpart-label">(d) Are \(X\) and \(Y\) independent?</span>
+    <p class="step">
+      \(X\) and \(Y\) are independent if and only if
+      \(P(X=x,Y=y) = P(X=x)\cdot P(Y=y)\) for <em>every</em> pair \((x,y)\).
+    </p>
+    <p class="step">
+      Check one cell — say \((x,y)=(1,3)\):
+      \[
+        P(X=1)\cdot P(Y=3) = 0.4 \times 0.3 = 0.12,
+      \]
+      \[
+        P(X=1,\,Y=3) = 0.2.
+      \]
+      Since \(0.12 \ne 0.2\), the factorization fails.
+    </p>
+    <div class="answer">
+      \(X\) and \(Y\) are <strong>not independent</strong>, because
+      \(P(X=1,Y=3)=0.2 \ne 0.4\times0.3=0.12 = P(X=1)\cdot P(Y=3)\).
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="problem">
+  <div class="problem-title">Problem 2 &mdash; Joint PDF \(f_{XY}(x,y) = c(x+y)\) on \((0,1)\times(0,1)\)</div>
+
+  <!-- (a) -->
+  <div class="subpart">
+    <span class="subpart-label">(a) Find the constant \(c\)</span>
+    <p class="step">
+      The total probability must equal 1:
+      \[
+        \int_0^1\int_0^1 c(x+y)\,dx\,dy = 1.
+      \]
+      Evaluate the inner integral first:
+      \[
+        \int_0^1 (x+y)\,dx = \left[\frac{x^2}{2}+xy\right]_0^1 = \frac{1}{2}+y.
+      \]
+      Then the outer integral:
+      \[
+        \int_0^1\left(\frac{1}{2}+y\right)dy = \left[\frac{y}{2}+\frac{y^2}{2}\right]_0^1 = \frac{1}{2}+\frac{1}{2} = 1.
+      \]
+      So \(c \cdot 1 = 1\).
+    </p>
+    <div class="answer">
+      \(\displaystyle c = 1\), hence \(f_{XY}(x,y) = x + y\) on \((0,1)\times(0,1)\).
+    </div>
+  </div>
+
+  <!-- (b) -->
+  <div class="subpart">
+    <span class="subpart-label">(b) Marginal density \(f_X(x)\)</span>
+    <p class="step">
+      Integrate out \(y\):
+      \[
+        f_X(x) = \int_0^1 (x+y)\,dy = \left[xy + \frac{y^2}{2}\right]_0^1 = x + \frac{1}{2}, \quad 0 < x < 1.
+      \]
+    </p>
+    <p class="note">
+      By symmetry, \(f_Y(y) = y + \tfrac{1}{2}\) for \(0 < y < 1\).
+    </p>
+    <div class="answer">
+      \(\displaystyle f_X(x) = x + \frac{1}{2}, \quad 0 < x < 1\)
+    </div>
+  </div>
+
+  <!-- (c) -->
+  <div class="subpart">
+    <span class="subpart-label">(c) Find \(P(X < 0.5,\; Y > 0.3)\)</span>
+    <p class="step">
+      \[
+        P(X < 0.5,\,Y > 0.3)
+        = \int_0^{0.5}\int_{0.3}^{1}(x+y)\,dy\,dx.
+      \]
+      Inner integral (\(y\) from 0.3 to 1):
+      \[
+        \int_{0.3}^{1}(x+y)\,dy = \left[xy+\frac{y^2}{2}\right]_{0.3}^{1}
+        = \left(x + \frac{1}{2}\right) - \left(0.3x + \frac{0.09}{2}\right)
+        = 0.7x + 0.455.
+      \]
+      Outer integral (\(x\) from 0 to 0.5):
+      \[
+        \int_0^{0.5}(0.7x+0.455)\,dx
+        = \left[\frac{0.7x^2}{2}+0.455x\right]_0^{0.5}
+        = \frac{0.7(0.25)}{2} + 0.455(0.5)
+        = 0.0875 + 0.2275 = 0.3150.
+      \]
+    </p>
+    <div class="answer">
+      \(\displaystyle P(X < 0.5,\;Y > 0.3) = 0.315\)
+    </div>
+  </div>
+
+  <!-- (d) -->
+  <div class="subpart">
+    <span class="subpart-label">(d) Conditional density \(f_{X|Y}(x \mid y)\)</span>
+    <p class="step">
+      First find the marginal \(f_Y(y)\) (by symmetry with part (b)):
+      \[
+        f_Y(y) = \int_0^1(x+y)\,dx = \frac{1}{2}+y, \quad 0 < y < 1.
+      \]
+      The conditional density is:
+      \[
+        f_{X|Y}(x \mid y) = \frac{f_{XY}(x,y)}{f_Y(y)} = \frac{x+y}{\dfrac{1}{2}+y}, \quad 0 < x < 1.
+      \]
+    </p>
+    <p class="note">
+      Verification: \(\displaystyle\int_0^1 \frac{x+y}{y+\frac{1}{2}}\,dx
+      = \frac{1}{y+\frac{1}{2}}\!\int_0^1(x+y)\,dx
+      = \frac{y+\frac{1}{2}}{y+\frac{1}{2}} = 1.\checkmark\)
+    </p>
+    <div class="answer">
+      \(\displaystyle f_{X|Y}(x\mid y) = \frac{x+y}{y + \dfrac{1}{2}}, \quad 0 < x < 1\)
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

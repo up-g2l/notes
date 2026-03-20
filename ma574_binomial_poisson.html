@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>MA 574 – Binomial &amp; Poisson Distributions</title>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { font-family: Georgia, serif; max-width: 820px; margin: 0 auto; padding: 16px; font-size: 15px; line-height: 1.7; color: #111; }
+    h2 { text-align: center; font-size: 1.15rem; margin-bottom: 4px; }
+    hr { margin: 8px 0 20px; }
+    .problem { margin-bottom: 40px; }
+    .problem-title { font-weight: bold; font-size: 1.05rem; margin-bottom: 6px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+    .solution-label { font-weight: bold; color: #1a1a8c; margin-top: 14px; margin-bottom: 4px; }
+    .step { margin: 6px 0 6px 18px; }
+    .answer { background: #f0f4ff; border-left: 4px solid #1a1a8c; padding: 6px 12px; margin: 8px 0 8px 18px; display: block; }
+    .subpart { margin-top: 18px; }
+    .subpart-label { font-weight: bold; color: #333; }
+    .note { font-size: 0.88rem; color: #444; font-style: italic; margin-top: 8px; margin-left: 18px; }
+    table { border-collapse: collapse; margin: 10px 18px; font-size: 0.9rem; }
+    td, th { border: 1px solid #aaa; padding: 5px 13px; text-align: center; }
+    th { background: #e8e8e8; }
+  </style>
+</head>
+<body>
+
+<h2>MA 574 (F25) &mdash; Binomial &amp; Poisson Distributions</h2>
+<hr/>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="problem">
+  <div class="problem-title">Problem 1 &mdash; Binomial Distribution (Fair Coin, 10 Tosses)</div>
+
+  <div class="solution-label">Setup</div>
+  <p class="step">
+    Let \(X\) = number of heads in 10 tosses of a fair coin. Then
+    \[
+      X \sim \text{Binomial}(n=10,\; p=0.5).
+    \]
+    The probability mass function is
+    \[
+      P(X = k) = \binom{10}{k}(0.5)^k(0.5)^{10-k} = \binom{10}{k}\left(\frac{1}{2}\right)^{10}
+               = \frac{\dbinom{10}{k}}{1024}, \quad k = 0,1,\ldots,10.
+    \]
+  </p>
+
+  <!-- (a) -->
+  <div class="subpart">
+    <span class="subpart-label">(a) Exactly 4 heads</span>
+    <p class="step">
+      \[
+        P(X = 4) = \binom{10}{4}\left(\frac{1}{2}\right)^{10}
+                 = \frac{210}{1024}.
+      \]
+    </p>
+    <div class="answer">
+      \(\displaystyle P(X=4) = \frac{210}{1024} \approx 0.2051\)
+    </div>
+  </div>
+
+  <!-- (b) -->
+  <div class="subpart">
+    <span class="subpart-label">(b) At most 3 heads</span>
+    <p class="step">
+      \[
+        P(X \le 3) = \sum_{k=0}^{3} \binom{10}{k}\left(\frac{1}{2}\right)^{10}
+                   = \frac{1}{1024}\left[\binom{10}{0}+\binom{10}{1}+\binom{10}{2}+\binom{10}{3}\right].
+      \]
+      \[
+        = \frac{1 + 10 + 45 + 120}{1024} = \frac{176}{1024}.
+      \]
+    </p>
+    <div class="answer">
+      \(\displaystyle P(X \le 3) = \frac{176}{1024} \approx 0.1719\)
+    </div>
+  </div>
+
+  <!-- (c) -->
+  <div class="subpart">
+    <span class="subpart-label">(c) At least 7 heads</span>
+    <p class="step">
+      \[
+        P(X \ge 7) = \sum_{k=7}^{10} \binom{10}{k}\left(\frac{1}{2}\right)^{10}
+                   = \frac{\binom{10}{7}+\binom{10}{8}+\binom{10}{9}+\binom{10}{10}}{1024}.
+      \]
+      \[
+        = \frac{120 + 45 + 10 + 1}{1024} = \frac{176}{1024}.
+      \]
+    </p>
+    <p class="note">
+      Note: By symmetry of the fair coin (\(p = 0.5\)), \(P(X \ge 7) = P(X \le 3)\).
+    </p>
+    <div class="answer">
+      \(\displaystyle P(X \ge 7) = \frac{176}{1024} \approx 0.1719\)
+    </div>
+  </div>
+
+  <!-- (d) -->
+  <div class="subpart">
+    <span class="subpart-label">(d) Between 3 and 6 heads (inclusive)</span>
+    <p class="step">
+      \[
+        P(3 \le X \le 6) = \sum_{k=3}^{6}\binom{10}{k}\left(\frac{1}{2}\right)^{10}
+        = \frac{\binom{10}{3}+\binom{10}{4}+\binom{10}{5}+\binom{10}{6}}{1024}.
+      \]
+      \[
+        = \frac{120 + 210 + 252 + 210}{1024} = \frac{792}{1024}.
+      \]
+    </p>
+    <p class="note">
+      Alternatively: \(P(3 \le X \le 6) = 1 - P(X \le 2) - P(X \ge 7)\)
+      \(= 1 - \tfrac{56}{1024} - \tfrac{176}{1024} = \tfrac{792}{1024}.\)
+    </p>
+    <div class="answer">
+      \(\displaystyle P(3 \le X \le 6) = \frac{792}{1024} \approx 0.7734\)
+    </div>
+  </div>
+
+  <!-- Reference table -->
+  <div class="solution-label" style="margin-top:22px;">Reference: Binomial Coefficients for \(n=10\)</div>
+  <table>
+    <tr>
+      <th>\(k\)</th>
+      <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th>
+      <th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+    </tr>
+    <tr>
+      <th>\(\binom{10}{k}\)</th>
+      <td>1</td><td>10</td><td>45</td><td>120</td><td>210</td>
+      <td>252</td><td>210</td><td>120</td><td>45</td><td>10</td><td>1</td>
+    </tr>
+    <tr>
+      <th>\(P(X=k)\)</th>
+      <td>0.001</td><td>0.010</td><td>0.044</td><td>0.117</td><td>0.205</td>
+      <td>0.246</td><td>0.205</td><td>0.117</td><td>0.044</td><td>0.010</td><td>0.001</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="problem">
+  <div class="problem-title">Problem 2 &mdash; Poisson Distribution (Call Center, \(\lambda = 4\) calls/hour)</div>
+
+  <div class="solution-label">Setup</div>
+  <p class="step">
+    Let \(X\) = number of calls received in one hour. Then
+    \[
+      X \sim \text{Poisson}(\lambda = 4).
+    \]
+    The probability mass function is
+    \[
+      P(X = k) = \frac{e^{-4}\,4^k}{k!}, \quad k = 0, 1, 2, \ldots
+    \]
+    Note: \(e^{-4} \approx 0.018316.\)
+  </p>
+
+  <!-- (a) -->
+  <div class="subpart">
+    <span class="subpart-label">(a) Exactly 6 calls</span>
+    <p class="step">
+      \[
+        P(X = 6) = \frac{e^{-4}\,4^6}{6!} = \frac{e^{-4} \times 4096}{720}.
+      \]
+      \[
+        = e^{-4} \times 5.6\overline{8} \approx 0.018316 \times 5.6\overline{8} \approx 0.1042.
+      \]
+    </p>
+    <div class="answer">
+      \(\displaystyle P(X=6) = \frac{4096\,e^{-4}}{720} \approx 0.1042\)
+    </div>
+  </div>
+
+  <!-- (b) -->
+  <div class="subpart">
+    <span class="subpart-label">(b) At most 2 calls</span>
+    <p class="step">
+      \[
+        P(X \le 2) = P(X=0) + P(X=1) + P(X=2)
+                   = e^{-4}\left(\frac{4^0}{0!} + \frac{4^1}{1!} + \frac{4^2}{2!}\right).
+      \]
+      \[
+        = e^{-4}(1 + 4 + 8) = 13\,e^{-4}.
+      \]
+      \[
+        \approx 13 \times 0.018316 \approx 0.2381.
+      \]
+    </p>
+    <div class="answer">
+      \(\displaystyle P(X \le 2) = 13\,e^{-4} \approx 0.2381\)
+    </div>
+  </div>
+
+  <!-- (c) -->
+  <div class="subpart">
+    <span class="subpart-label">(c) At least 1 call</span>
+    <p class="step">
+      Use the complement:
+      \[
+        P(X \ge 1) = 1 - P(X = 0) = 1 - \frac{e^{-4}\,4^0}{0!} = 1 - e^{-4}.
+      \]
+      \[
+        \approx 1 - 0.018316 \approx 0.9817.
+      \]
+    </p>
+    <div class="answer">
+      \(\displaystyle P(X \ge 1) = 1 - e^{-4} \approx 0.9817\)
+    </div>
+  </div>
+
+  <!-- Reference table -->
+  <div class="solution-label" style="margin-top:22px;">Reference: Poisson PMF values for \(\lambda = 4\)</div>
+  <table>
+    <tr>
+      <th>\(k\)</th>
+      <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th>
+    </tr>
+    <tr>
+      <th>\(P(X=k)\)</th>
+      <td>0.0183</td><td>0.0733</td><td>0.1465</td><td>0.1954</td><td>0.1954</td>
+      <td>0.1563</td><td>0.1042</td><td>0.0595</td><td>0.0298</td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>
