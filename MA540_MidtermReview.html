@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MA 540 — Midterm Review</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/white.min.css">
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea'] },
+  startup: { typeset: false }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+<style>
+:root { --red:#8c1515; --red-light:#fdf4f4; --blue-light:#f0f4fb; --green-light:#f0faf4; }
+.reveal { font-size:18px; font-family:'Segoe UI',Arial,sans-serif; }
+.reveal h1,.reveal h2,.reveal h3 { color:var(--red); text-transform:none; letter-spacing:0; }
+.reveal h2 { font-size:1.35em; border-bottom:2px solid var(--red); padding-bottom:5px; margin-bottom:14px; }
+.reveal section { text-align:left; }
+.reveal ul { margin:0 0 0 1.2em; }
+.reveal ul li { margin-bottom:7px; line-height:1.5; }
+.reveal p { margin:6px 0; }
+
+/* Boxes */
+.fbox { background:var(--red-light); border-left:4px solid var(--red); border-radius:0 6px 6px 0; padding:9px 13px; margin:6px 0; font-size:0.88em; }
+.qbox { background:var(--blue-light); border-left:4px solid #1a4a9e; border-radius:0 6px 6px 0; padding:9px 13px; margin:5px 0; font-size:0.86em; }
+.sbox { background:var(--green-light); border-left:4px solid #1a7a3a; border-radius:0 6px 6px 0; padding:9px 13px; margin:5px 0; font-size:0.86em; }
+.ansbox { background:#fff8e1; border:2px solid #e6a817; border-radius:5px; padding:3px 10px; display:inline-block; font-weight:700; font-size:0.92em; margin-top:3px; }
+
+/* Chapter tag */
+.tag { display:inline-block; background:var(--red); color:#fff; border-radius:4px; padding:1px 8px; font-size:0.72em; font-weight:600; vertical-align:middle; margin-right:6px; letter-spacing:.5px; }
+.pts { color:#777; font-size:0.75em; margin-left:8px; }
+
+/* Section divider */
+.reveal .secdiv { text-align:center !important; }
+.reveal .secdiv h2 { border:none; font-size:2em; margin-top:70px; color:var(--red); }
+.reveal .secdiv p { color:#666; font-size:1em; }
+
+/* Mini table */
+table.pmf { border-collapse:collapse; font-size:0.82em; margin:8px 0; }
+table.pmf th { background:var(--red); color:#fff; padding:4px 12px; }
+table.pmf td { border:1px solid #ccc; padding:4px 12px; text-align:center; }
+table.pmf tr:nth-child(even) { background:#f6f6f6; }
+
+/* Contents table */
+table.ctt { border-collapse:collapse; width:100%; font-size:0.82em; }
+table.ctt th { background:var(--red); color:#fff; padding:5px 10px; text-align:left; }
+table.ctt td { border:1px solid #ddd; padding:5px 10px; vertical-align:top; }
+table.ctt tr:nth-child(even) td { background:#f9f9f9; }
+</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- ─────────────────────────── TITLE ─────────────────────────── -->
+<section>
+  <div style="text-align:center;padding-top:55px;">
+    <p style="color:#888;font-size:.82em;text-transform:uppercase;letter-spacing:2px;">
+      Stevens Institute of Technology &nbsp;·&nbsp; MA 540
+    </p>
+    <h1 style="font-size:1.85em;color:#8c1515;margin:14px 0 8px;">Midterm Exam Review</h1>
+    <p style="color:#444;font-size:1em;">Probability &amp; Stochastic Processes · Fall 2026</p>
+    <hr style="width:55%;border-color:#8c1515;margin:22px auto;">
+    <p style="color:#666;font-size:.86em;">
+      Chapters 1–6 &nbsp;|&nbsp; Formulas &amp; Practice Questions (interleaved by topic)
+    </p>
+  </div>
+</section>
+
+<!-- ─────────────────────────── CONTENTS ─────────────────────────── -->
+<section>
+  <h2>Contents</h2>
+  <table class="ctt">
+    <tr><th>Chapter / Topic</th><th>Practice Questions</th></tr>
+    <tr><td><strong>Ch. 1–2</strong> Counting &amp; Probability</td><td>Q1 (a)–(d), (f), (g)</td></tr>
+    <tr><td><strong>Ch. 3</strong> Conditional Probability &amp; Bayes</td><td>Q1 (e), (h)–(j) &nbsp;·&nbsp; Q3 (PPV &amp; NPV)</td></tr>
+    <tr><td><strong>Ch. 4</strong> Random Variables, Expectation &amp; Variance</td><td>Q5 (Four-sided die)</td></tr>
+    <tr><td><strong>Ch. 4–5</strong> Discrete Distributions</td><td>Q8 (Poisson call center)</td></tr>
+    <tr><td><strong>Ch. 5</strong> Continuous Distributions</td><td>Q4 (Bulb PDF) &nbsp;·&nbsp; Q6 (Normal) &nbsp;·&nbsp; Q7 (Exponential)</td></tr>
+    <tr><td><strong>Ch. 6</strong> Joint Distributions</td><td>Q2 (Joint PMF table) &nbsp;·&nbsp; Q9 (Joint exponential) &nbsp;·&nbsp; Q10 (Polar Jacobian)</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CH. 1–2 — COUNTING & PROBABILITY
+═══════════════════════════════════════════════════════ -->
+<section>
+  <h2><span class="tag">Ch. 1–2</span> Counting &amp; Probability — Formulas</h2>
+  <div class="fbox">
+    <strong>Equally likely outcomes:</strong>
+    \[P(A)=\frac{|A|}{|S|}\]
+  </div>
+  <div class="fbox">
+    <strong>Permutations / Combinations / Multinomial:</strong>
+    \[P(n,r)=\frac{n!}{(n-r)!} \qquad \binom{n}{r}=\frac{n!}{r!\,(n-r)!} \qquad \frac{n!}{n_1!\cdots n_k!}\]
+  </div>
+  <div class="fbox">
+    <strong>Inclusion-Exclusion:</strong>
+    \[P(A\cup B)=P(A)+P(B)-P(A\cap B)\]
+  </div>
+  <div class="fbox">
+    <strong>Complement &amp; Difference:</strong>
+    \[P(A^c)=1-P(A) \qquad P(A\setminus B)=P(A)-P(A\cap B)\]
+  </div>
+</section>
+
+<!-- Q1 Counting — Questions (a)–(d), (f), (g) -->
+<section>
+  <h2>Q1 — Counting Problems <span class="pts">[Ch. 1–2 · 3 pts each]</span></h2>
+  <div class="qbox"><strong>(a)</strong> What fraction of all shortest grid paths from \(A(0,0)\) to \(B(7,5)\) pass through \(C(3,2)\)?</div>
+  <div class="qbox"><strong>(b)</strong> Six faculty are chosen uniformly at random, one per assignment. What is the probability all six are from different departments (out of 11)?</div>
+  <div class="qbox"><strong>(c)</strong> A 3-member bench is chosen at random from 9 justices (6 conservative, 3 liberal). Find the probability all three share the same ideology.</div>
+  <div class="qbox"><strong>(d)</strong> All 9 justices stand in a line for a photo. Find the probability no two liberal justices are adjacent.</div>
+  <div class="qbox"><strong>(f)</strong> A bag has 6 red and 5 blue balls. Three are drawn without replacement. Find \(P(\text{at least one red})\).</div>
+  <div class="qbox"><strong>(g)</strong> A fair coin is tossed 5 times. Find \(P(\text{more heads than tails})\).</div>
+</section>
+
+<!-- Q1 Counting — Solutions (a)–(d) -->
+<section>
+  <h2>Q1 — Solutions (a)–(d)</h2>
+  <div class="sbox">
+    <strong>(a)</strong> A→C: \(\binom{5}{2}=10\); C→B: \(\binom{7}{3}=35\); total A→B: \(\binom{12}{5}=792\)
+    <div class="ansbox">\(P=\dfrac{10\times35}{792}=\dfrac{175}{396}\approx0.4419\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(b)</strong> Sample space: \(11^6\); favorable: \(P(11,6)=11\cdot10\cdot9\cdot8\cdot7\cdot6\)
+    <div class="ansbox">\(P=P(11,6)/11^6\approx0.1878\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(c)</strong> All conservative: \(\binom{6}{3}=20\); all liberal: \(\binom{3}{3}=1\); total: \(\binom{9}{3}=84\)
+    <div class="ansbox">\(P=21/84=1/4\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(d)</strong> Arrange 6 conservatives (\(6!\) ways) → 7 gaps; place 3 liberals in distinct gaps: \(P(7,3)=210\)
+    <div class="ansbox">\(P=\dfrac{6!\times P(7,3)}{9!}=\dfrac{720\times210}{362{,}880}=5/12\)</div>
+  </div>
+</section>
+
+<!-- Q1 Counting — Solutions (f)–(g) -->
+<section>
+  <h2>Q1 — Solutions (f)–(g)</h2>
+  <div class="sbox">
+    <strong>(f)</strong>
+    \[P(\text{no red})=\frac{\binom{5}{3}}{\binom{11}{3}}=\frac{10}{165}\]
+    <div class="ansbox">\(P(\ge1\text{ red})=1-10/165=31/33\approx0.9394\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(g)</strong> More H than T \(\Leftrightarrow X\ge3\) where \(X\sim\text{Bin}(5,\tfrac12)\):
+    \[P(X\ge3)=\frac{\binom53+\binom54+\binom55}{2^5}=\frac{10+5+1}{32}=\frac{16}{32}\]
+    <div class="ansbox">\(P=1/2\)</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CH. 3 — CONDITIONAL PROBABILITY
+═══════════════════════════════════════════════════════ -->
+<section>
+  <h2><span class="tag">Ch. 3</span> Conditional Probability &amp; Bayes — Formulas</h2>
+  <div class="fbox">
+    <strong>Conditional probability:</strong>
+    \[P(A\mid B)=\frac{P(A\cap B)}{P(B)}\]
+  </div>
+  <div class="fbox">
+    <strong>Multiplication rule:</strong>
+    \[P(A\cap B)=P(A\mid B)\,P(B)=P(B\mid A)\,P(A)\]
+  </div>
+  <div class="fbox">
+    <strong>Law of Total Probability</strong> (partition \(A_1,\ldots,A_n\)):
+    \[P(B)=\sum_{i}P(B\mid A_i)\,P(A_i)\]
+  </div>
+  <div class="fbox">
+    <strong>Bayes' Formula:</strong>
+    \[P(A_j\mid B)=\frac{P(B\mid A_j)\,P(A_j)}{\displaystyle\sum_{i}P(B\mid A_i)\,P(A_i)}\]
+  </div>
+  <div class="fbox">
+    <strong>Independence:</strong>
+    \[A\perp B \;\Leftrightarrow\; P(A\cap B)=P(A)\,P(B) \;\Leftrightarrow\; P(A\mid B)=P(A)\]
+  </div>
+</section>
+
+<!-- Q1 Conditional — Questions (e), (h)–(j) -->
+<section>
+  <h2>Q1 — Conditional Probability Problems <span class="pts">[Ch. 3 · 3 pts each]</span></h2>
+  <div class="qbox"><strong>(e)</strong> A fair die is rolled 5 times. Given that the first and last rolls sum to 5, find \(P(\text{all five rolls show different numbers})\).</div>
+  <div class="qbox"><strong>(h)</strong> \(P(E)=0.6\), \(P(F)=0.5\), \(P(F\mid E)=0.4\). Find \(P(E\cup F)\).</div>
+  <div class="qbox"><strong>(i)</strong> \(A\perp B\), \(P(A)=0.5\), \(P(B)=0.6\). Find \(P(\text{exactly one of }A,B\text{ occurs})\).</div>
+  <div class="qbox"><strong>(j)</strong> Urn I: 5 red + 5 white. Urn II: 12 white. One ball is transferred from Urn I to Urn II at random; then one ball is drawn from Urn II. Find \(P(\text{white drawn})\).</div>
+</section>
+
+<!-- Q1 Conditional — Solutions (e), (h)–(j) -->
+<section>
+  <h2>Q1 — Solutions (e), (h)–(j)</h2>
+  <div class="sbox">
+    <strong>(e)</strong> Pairs \((d_1,d_5)\) summing to 5: 4 pairs; \(|B|=4\times6^3=864\). All different: \(4\times4\times3\times2=96\).
+    <div class="ansbox">\(P=96/864=1/9\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(h)</strong> \(P(E\cap F)=0.4\times0.6=0.24\)
+    <div class="ansbox">\(P(E\cup F)=0.6+0.5-0.24=0.86\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(i)</strong> \(P(\text{only }A)+P(\text{only }B)=0.5\times0.4+0.5\times0.6\)
+    <div class="ansbox">\(P=0.20+0.30=0.50\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(j)</strong> Urn II has 13 balls after transfer. By LTP:
+    \(P(W_2)=\tfrac12\cdot\tfrac{12}{13}+\tfrac12\cdot\tfrac{13}{13}=\tfrac{12}{26}+\tfrac{13}{26}\)
+    <div class="ansbox">\(P=25/26\approx0.9615\)</div>
+  </div>
+</section>
+
+<!-- Q3 — Question -->
+<section>
+  <h2>Q3 — Medical Testing: PPV &amp; NPV <span class="pts">[10 pts · Ch. 3]</span></h2>
+  <div class="qbox">
+    A medical test has:
+    <ul>
+      <li>Prevalence: \(P(D^+)=0.15\)</li>
+      <li>False positive rate: \(P(T^+\mid D^-)=0.20\)</li>
+      <li>False negative rate: \(P(T^-\mid D^+)=0.10\)</li>
+    </ul>
+    Find the <strong>Positive Predictive Value</strong> \(=P(D^+\mid T^+)\) and the
+    <strong>Negative Predictive Value</strong> \(=P(D^-\mid T^-)\).
+  </div>
+</section>
+
+<!-- Q3 — Solution -->
+<section>
+  <h2>Q3 — Solutions</h2>
+  <div class="sbox">
+    Sensitivity \(P(T^+\mid D^+)=0.90\); Specificity \(P(T^-\mid D^-)=0.80\).
+    <br><strong>Law of Total Probability:</strong>
+    \[P(T^+)=0.90\times0.15+0.20\times0.85=0.135+0.170=0.305\]
+  </div>
+  <div class="sbox">
+    <strong>PPV:</strong>
+    \[\text{PPV}=\frac{0.90\times0.15}{0.305}=\frac{0.135}{0.305}\]
+    <div class="ansbox">\(\approx0.4426\)</div>
+  </div>
+  <div class="sbox">
+    <strong>NPV:</strong> \(P(T^-)=1-0.305=0.695\)
+    \[\text{NPV}=\frac{0.80\times0.85}{0.695}=\frac{0.680}{0.695}\]
+    <div class="ansbox">\(\approx0.9784\)</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CH. 4 — RANDOM VARIABLES
+═══════════════════════════════════════════════════════ -->
+<section>
+  <h2><span class="tag">Ch. 4</span> Random Variables, Expectation &amp; Variance — Formulas</h2>
+  <div class="fbox">
+    <strong>PMF &amp; CDF:</strong>
+    \[p(x)=P(X=x),\quad\sum_x p(x)=1,\quad F(x)=P(X\le x)=\sum_{k\le x}p(k)\]
+  </div>
+  <div class="fbox">
+    <strong>Expectation:</strong>
+    \[E[X]=\sum_x x\,p(x),\qquad E[g(X)]=\sum_x g(x)\,p(x)\]
+  </div>
+  <div class="fbox">
+    <strong>Variance:</strong>
+    \[\text{Var}(X)=E[X^2]-(E[X])^2, \qquad \text{SD}(X)=\sqrt{\text{Var}(X)}\]
+  </div>
+  <div class="fbox">
+    <strong>Linear transformations &amp; sums:</strong>
+    \[E[aX+b]=aE[X]+b, \quad \text{Var}(aX+b)=a^2\text{Var}(X)\]
+    \[E[X+Y]=E[X]+E[Y], \quad \text{Var}(X+Y)=\text{Var}(X)+\text{Var}(Y)\;(X\perp Y)\]
+  </div>
+</section>
+
+<!-- Q5 — Question -->
+<section>
+  <h2>Q5 — Four-Sided Die <span class="pts">[12 pts · Ch. 4]</span></h2>
+  <div class="qbox">
+    A fair four-sided die (faces 1–4) is rolled twice.
+    Let \(X=d_1+d_2\) and \(Y=|d_1-d_2|\).
+    <ul>
+      <li>(a) Find the PMF of \(Y\).</li>
+      <li>(b) Find \(P(X\ge6)\).</li>
+      <li>(c) Find \(E[Y]\).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Q5 — Solution -->
+<section>
+  <h2>Q5 — Solutions</h2>
+  <div class="sbox">
+    <strong>(a)</strong> 16 equally likely outcomes:
+    <table class="pmf" style="margin:6px 0;">
+      <tr><th>\(y\)</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
+      <tr><td>\(P(Y=y)\)</td><td>\(1/4\)</td><td>\(3/8\)</td><td>\(1/4\)</td><td>\(1/8\)</td></tr>
+    </table>
+    (4, 6, 4, 2 outcomes respectively out of 16)
+  </div>
+  <div class="sbox">
+    <strong>(b)</strong> Pairs with sum \(\ge6\): \((2,4),(3,3),(3,4),(4,2),(4,3),(4,4)\) — 6 outcomes.
+    <div class="ansbox">\(P(X\ge6)=6/16=3/8\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(c)</strong>
+    \[E[Y]=0\cdot\tfrac14+1\cdot\tfrac38+2\cdot\tfrac14+3\cdot\tfrac18
+    =\frac{0+3+4+3}{8}=\frac{10}{8}\]
+    <div class="ansbox">\(E[Y]=5/4=1.25\)</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CH. 4–5 — DISCRETE DISTRIBUTIONS
+═══════════════════════════════════════════════════════ -->
+<section>
+  <h2><span class="tag">Ch. 4–5</span> Discrete Distributions — Formulas</h2>
+  <div class="fbox">
+    <strong>Binomial\((n,p)\):</strong>
+    \[P(X=k)=\binom nk p^k(1-p)^{n-k},\quad\mu=np,\quad\sigma^2=np(1-p)\]
+  </div>
+  <div class="fbox">
+    <strong>Poisson\((\lambda)\):</strong>
+    \[P(X=k)=e^{-\lambda}\frac{\lambda^k}{k!},\quad\mu=\sigma^2=\lambda\]
+  </div>
+  <div class="fbox">
+    <strong>Geometric\((p)\)</strong> (# trials to 1st success):
+    \[P(X=k)=(1-p)^{k-1}p,\quad\mu=1/p,\quad\sigma^2=(1-p)/p^2\]
+  </div>
+  <div class="fbox">
+    <strong>Negative Binomial\((r,p)\)</strong> (# trials for \(r\)-th success):
+    \[P(X=k)=\binom{k-1}{r-1}p^r(1-p)^{k-r},\quad\mu=r/p\]
+  </div>
+  <div class="fbox">
+    <strong>Hypergeometric</strong> (sample \(n\) from \(N\) with \(K\) special):
+    \[P(X=k)=\frac{\binom Kk\binom{N-K}{n-k}}{\binom Nn},\quad\mu=nK/N\]
+  </div>
+</section>
+
+<!-- Q8 — Question -->
+<section>
+  <h2>Q8 — Poisson Distribution <span class="pts">[6 pts · Ch. 4–5]</span></h2>
+  <div class="qbox">
+    A call center receives an average of 4 calls per hour.
+    <ul>
+      <li>(a) Find the probability of at most 2 calls in one hour.</li>
+      <li>(b) Find the probability of at least 1 call in one hour.</li>
+      <li>(c) Find the probability of exactly 1 call in a 15-minute window.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Q8 — Solution -->
+<section>
+  <h2>Q8 — Solutions</h2>
+  <div class="sbox">
+    \(N\sim\text{Poisson}(4)\) for 1 hr; &ensp;\(N'\sim\text{Poisson}(1)\) for 15 min.
+  </div>
+  <div class="sbox">
+    <strong>(a)</strong>
+    \[P(N\le2)=e^{-4}(1+4+8)=13e^{-4}\]
+    <div class="ansbox">\(\approx0.2381\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(b)</strong>
+    \[P(N\ge1)=1-e^{-4}\]
+    <div class="ansbox">\(\approx0.9817\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(c)</strong>
+    \[P(N'=1)=e^{-1}\cdot1=e^{-1}\]
+    <div class="ansbox">\(\approx0.3679\)</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CH. 5 — CONTINUOUS DISTRIBUTIONS
+═══════════════════════════════════════════════════════ -->
+<section>
+  <h2><span class="tag">Ch. 5</span> Continuous Distributions — Formulas</h2>
+  <div class="fbox">
+    <strong>PDF &amp; CDF:</strong>
+    \[\int_{-\infty}^\infty f(x)\,dx=1,\quad F(x)=\int_{-\infty}^xf(t)\,dt,\quad P(a<X<b)=\int_a^b f(x)\,dx\]
+  </div>
+  <div class="fbox">
+    <strong>Uniform\((a,b)\):</strong>
+    \[f(x)=\frac{1}{b-a},\quad\mu=\frac{a+b}{2},\quad\sigma^2=\frac{(b-a)^2}{12}\]
+  </div>
+  <div class="fbox">
+    <strong>Exponential\((\lambda)\):</strong>
+    \[f(x)=\lambda e^{-\lambda x},\quad F(x)=1-e^{-\lambda x},\quad\mu=1/\lambda,\quad\sigma^2=1/\lambda^2\]
+    Memoryless: \(P(X>s+t\mid X>s)=P(X>t)\)
+  </div>
+  <div class="fbox">
+    <strong>Normal\((\mu,\sigma^2)\):</strong>
+    \[f(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right),\quad
+    P(a<X<b)=\Phi\!\!\left(\frac{b-\mu}{\sigma}\right)-\Phi\!\!\left(\frac{a-\mu}{\sigma}\right)\]
+  </div>
+</section>
+
+<!-- Q4 — Question -->
+<section>
+  <h2>Q4 — Bulb Lifetime PDF <span class="pts">[10 pts · Ch. 5]</span></h2>
+  <div class="qbox">
+    The lifetime (days) of an incandescent bulb has PDF
+    \[f(x)=\frac{5}{2}\,x^{-3/2},\quad x>25.\]
+    A room has 8 independent bulbs. Find:
+    <ul>
+      <li>(a) \(P(\text{no bulb needs replacement in first 50 days})\)</li>
+      <li>(b) \(P(\text{exactly 4 bulbs need replacement in first 50 days})\)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Q4 — Solution -->
+<section>
+  <h2>Q4 — Solutions</h2>
+  <div class="sbox">
+    <strong>Single-bulb survival:</strong>
+    \[P(X>50)=\int_{50}^\infty\tfrac52\,x^{-3/2}\,dx=\frac{5}{\sqrt{50}}=\frac{1}{\sqrt{2}}\approx0.7071\]
+  </div>
+  <div class="sbox">
+    <strong>(a)</strong> All 8 survive:
+    \[P=\left(\frac{1}{\sqrt{2}}\right)^{\!8}=\frac{1}{16}\]
+    <div class="ansbox">\(=0.0625\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(b)</strong> \(p=P(X\le50)=1-\frac1{\sqrt2}\approx0.2929\); &ensp;\(W\sim\text{Bin}(8,p)\).
+    \[P(W=4)=\binom{8}{4}\!\left(1-\tfrac{1}{\sqrt2}\right)^{\!4}\!\left(\tfrac{1}{\sqrt2}\right)^{\!4}
+    =\frac{70}{4}\!\left(1-\tfrac{1}{\sqrt2}\right)^{\!4}\]
+    <div class="ansbox">\(\approx0.1288\)</div>
+  </div>
+</section>
+
+<!-- Q6 — Question -->
+<section>
+  <h2>Q6 — Normal Distribution <span class="pts">[10 pts · Ch. 5]</span></h2>
+  <div class="qbox">
+    Rod diameter: \(X\sim N(10,\,0.04)\) mm (\(\mu=10,\,\sigma=0.2\)). Defective if outside \([9.7,\,10.4]\). Find:
+    <ul>
+      <li>(a) \(P(9.8\le X\le10.3)\)</li>
+      <li>(b) \(P(\text{defective})\)</li>
+      <li>(c) 90th percentile of \(X\)</li>
+    </ul>
+  </div>
+  <div class="fbox" style="font-size:.8em;">
+    \(\Phi(1)\approx0.8413,\;\Phi(1.5)\approx0.9332,\;\Phi(2)\approx0.9772,\;z_{0.90}=1.282\)
+  </div>
+</section>
+
+<!-- Q6 — Solution -->
+<section>
+  <h2>Q6 — Solutions</h2>
+  <div class="sbox">
+    <strong>(a)</strong> \(z_1=(9.8-10)/0.2=-1\), \(z_2=(10.3-10)/0.2=1.5\)
+    \[P=\Phi(1.5)-\Phi(-1)=0.9332-0.1587\]
+    <div class="ansbox">\(=0.7745\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(b)</strong> \(z_3=-1.5\), \(z_4=2\)
+    \[P(\text{defect})=\Phi(-1.5)+(1-\Phi(2))=0.0668+0.0228\]
+    <div class="ansbox">\(=0.0896\approx8.96\%\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(c)</strong> \(c=10+1.282\times0.2\)
+    <div class="ansbox">\(\approx10.2564\text{ mm}\)</div>
+  </div>
+</section>
+
+<!-- Q7 — Question -->
+<section>
+  <h2>Q7 — Exponential Distribution <span class="pts">[6 pts · Ch. 5]</span></h2>
+  <div class="qbox">
+    Members arrive at a gym with mean inter-arrival time 3 minutes (\(\lambda=1/3\)).
+    <ul>
+      <li>(a) Find \(P(\text{next member arrives within 3 min})\).</li>
+      <li>(b) Find \(P(\text{next member arrives after 6 min})\).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Q7 — Solution -->
+<section>
+  <h2>Q7 — Solutions</h2>
+  <div class="sbox">
+    \(X\sim\text{Exp}(1/3)\), so \(P(X>t)=e^{-t/3}\).
+  </div>
+  <div class="sbox">
+    <strong>(a)</strong>
+    \[P(X\le3)=1-e^{-1}\]
+    <div class="ansbox">\(\approx0.6321\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(b)</strong>
+    \[P(X>6)=e^{-2}\]
+    <div class="ansbox">\(\approx0.1353\)</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CH. 6 — JOINT DISTRIBUTIONS
+═══════════════════════════════════════════════════════ -->
+<section>
+  <h2><span class="tag">Ch. 6</span> Jointly Distributed Random Variables — Formulas</h2>
+  <div class="fbox">
+    <strong>Marginals:</strong>
+    \[f_X(x)=\int_{-\infty}^\infty f(x,y)\,dy, \qquad f_Y(y)=\int_{-\infty}^\infty f(x,y)\,dx\]
+  </div>
+  <div class="fbox">
+    <strong>Independence:</strong>
+    \[f(x,y)=f_X(x)\,f_Y(y)\text{ for all }x,y\]
+  </div>
+  <div class="fbox">
+    <strong>Conditional PDF:</strong>
+    \[f_{X\mid Y}(x\mid y)=\frac{f(x,y)}{f_Y(y)}, \qquad E[X\mid Y=y]=\int x\,f_{X\mid Y}(x\mid y)\,dx\]
+  </div>
+  <div class="fbox">
+    <strong>Covariance &amp; Correlation:</strong>
+    \[\text{Cov}(X,Y)=E[XY]-E[X]\,E[Y], \qquad \rho=\frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)\,\text{Var}(Y)}},\quad -1\le\rho\le1\]
+  </div>
+  <div class="fbox">
+    <strong>Jacobian Transformation \((U,V)=g(X,Y)\):</strong>
+    \[f_{U,V}(u,v)=f_{X,Y}(x,y)\,\left|\det\frac{\partial(x,y)}{\partial(u,v)}\right|\]
+  </div>
+</section>
+
+<!-- Q2 — Question -->
+<section>
+  <h2>Q2 — Joint Distribution Table <span class="pts">[10 pts · Ch. 6]</span></h2>
+  <p>Given the joint PMF of \((X,Y)\):</p>
+  <table class="pmf" style="margin:10px auto;">
+    <tr><th>\(X\backslash Y\)</th><th>0</th><th>1</th><th>2</th></tr>
+    <tr><td><strong>0</strong></td><td>0.05</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td><strong>1</strong></td><td>0.10</td><td>0.15</td><td>0.05</td></tr>
+    <tr><td><strong>2</strong></td><td>0.05</td><td>0.20</td><td>0.10</td></tr>
+    <tr><td><strong>3</strong></td><td>0.00</td><td>0.10</td><td>0.20</td></tr>
+  </table>
+  <div class="qbox">
+    Find: &ensp;(a) \(P(X=Y)\) &ensp;·&ensp; (b) \(P(X\ge2,\;Y=2)\) &ensp;·&ensp; (c) \(P(Y=1\mid X=2)\) &ensp;·&ensp; (d) \(E[Y]\)
+  </div>
+</section>
+
+<!-- Q2 — Solution -->
+<section>
+  <h2>Q2 — Solutions</h2>
+  <div class="sbox">
+    <strong>(a)</strong> \(P(X=Y)=p(0,0)+p(1,1)+p(2,2)=0.05+0.15+0.10\)
+    <div class="ansbox">\(=0.30\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(b)</strong> \(P(X\ge2,Y=2)=p(2,2)+p(3,2)=0.10+0.20\)
+    <div class="ansbox">\(=0.30\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(c)</strong> \(p_X(2)=0.05+0.20+0.10=0.35\)
+    \[P(Y=1\mid X=2)=\frac{0.20}{0.35}\]
+    <div class="ansbox">\(=4/7\approx0.5714\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(d)</strong> \(p_Y(0)=0.20,\;p_Y(1)=0.45,\;p_Y(2)=0.35\)
+    \[E[Y]=0(0.20)+1(0.45)+2(0.35)\]
+    <div class="ansbox">\(=1.15\)</div>
+  </div>
+</section>
+
+<!-- Q9 — Question -->
+<section>
+  <h2>Q9 — Joint Exponential PDF <span class="pts">[12 pts · Ch. 6]</span></h2>
+  <div class="qbox">
+    Let \((X,Y)\) have joint PDF \(f(x,y)=C\,e^{-3x/2}e^{-2y}\), \(x,y>0\).
+    <ul>
+      <li>(a) Find \(C\).</li>
+      <li>(b) Find \(P(X\le2,\;Y>1)\).</li>
+      <li>(c) Find \(P(Y&lt;2X)\).</li>
+      <li>(d) Find the conditional density \(f_{X\mid Y}(x\mid y)\).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Q9 — Solutions (a)–(b) -->
+<section>
+  <h2>Q9 — Solutions (a)–(b)</h2>
+  <div class="sbox">
+    <strong>(a)</strong> PDF factors, so integrals separate:
+    \[\iint Ce^{-3x/2}e^{-2y}\,dy\,dx=C\cdot\frac{2}{3}\cdot\frac{1}{2}=\frac{C}{3}=1\]
+    <div class="ansbox">\(C=3\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(b)</strong> \(f(x,y)=f_X(x)\cdot f_Y(y)\) with \(f_X=\tfrac32e^{-3x/2}\), \(f_Y=2e^{-2y}\); \(X\perp Y\).
+    \[P(X\le2,\,Y>1)=(1-e^{-3})\cdot e^{-2}\]
+    <div class="ansbox">\(\approx0.1286\)</div>
+  </div>
+</section>
+
+<!-- Q9 — Solutions (c)–(d) -->
+<section>
+  <h2>Q9 — Solutions (c)–(d)</h2>
+  <div class="sbox">
+    <strong>(c)</strong>
+    \[P(Y<2X)=\int_0^\infty\!\int_0^{2x}3e^{-3x/2}e^{-2y}\,dy\,dx
+    =\frac{3}{2}\!\left(\frac{2}{3}-\frac{2}{11}\right)=\frac{3}{2}\cdot\frac{16}{33}\]
+    <div class="ansbox">\(=8/11\approx0.7273\)</div>
+  </div>
+  <div class="sbox">
+    <strong>(d)</strong> Marginal: \(f_Y(y)=2e^{-2y}\).
+    \[f_{X\mid Y}(x\mid y)=\frac{3e^{-3x/2}e^{-2y}}{2e^{-2y}}\]
+    <div class="ansbox">\(=\tfrac{3}{2}e^{-3x/2},\quad x>0\)</div>
+    (Independent of \(y\) — confirms \(X\perp Y\); \(X\sim\text{Exp}(3/2)\))
+  </div>
+</section>
+
+<!-- Q10 — Question -->
+<section>
+  <h2>Q10 — Polar Coordinate Transformation <span class="pts">[10 pts · Ch. 6]</span></h2>
+  <div class="qbox">
+    Let \(X,Y\stackrel{\text{i.i.d.}}{\sim}\text{Uniform}(0,1)\), so \(f_{X,Y}(x,y)=1\) on \((0,1)^2\).
+    Define
+    \[R=\sqrt{X^2+Y^2}, \qquad \Theta=\arctan(Y/X).\]
+    Find the joint PDF \(f_{R,\Theta}(r,\theta)\), specifying its support.
+  </div>
+</section>
+
+<!-- Q10 — Solution -->
+<section>
+  <h2>Q10 — Solutions</h2>
+  <div class="sbox">
+    <strong>Inverse transform:</strong> \(X=R\cos\Theta\), \(Y=R\sin\Theta\)
+  </div>
+  <div class="sbox">
+    <strong>Jacobian:</strong>
+    \[|\mathbf{J}|=\left|\det\begin{pmatrix}\cos\theta & -r\sin\theta\\ \sin\theta & r\cos\theta\end{pmatrix}\right|=r\]
+  </div>
+  <div class="sbox">
+    <strong>Support:</strong> \(x,y\in(0,1)\Rightarrow\theta\in(0,\pi/2)\) and \(r<\min(\sec\theta,\csc\theta)\)
+  </div>
+  <div class="sbox">
+    <strong>Joint PDF:</strong>
+    \[f_{R,\Theta}(r,\theta)=f_{X,Y}(r\cos\theta,r\sin\theta)\cdot r=1\cdot r\]
+    <div class="ansbox">\(f_{R,\Theta}(r,\theta)=r,\quad 0<\theta<\pi/2,\quad 0<r<\min(\sec\theta,\csc\theta)\)</div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section>
+  <div style="text-align:center;padding-top:80px;">
+    <h2 style="border:none;font-size:1.6em;">Good Luck on the Midterm!</h2>
+    <p style="color:#666;margin-top:14px;">MA 540 · Probability &amp; Stochastic Processes · Stevens Institute of Technology</p>
+  </div>
+</section>
+
+</div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({ width:1100, height:700, margin:0.04, hash:true, transition:'slide', controls:true, progress:true, center:false });
+Reveal.on('ready',         () => { if (window.MathJax) MathJax.typesetPromise(); });
+Reveal.on('slidechanged',  () => { if (window.MathJax) MathJax.typesetPromise(); });
+Reveal.on('fragmentshown', () => { if (window.MathJax) MathJax.typesetPromise(); });
+</script>
+</body>
+</html>
